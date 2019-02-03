@@ -1,0 +1,65 @@
+#invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  border: 1px black solid;
+  margin: 0 auto;
+}
+
+#title {
+  text-align: center;
+  font-family: sans-serif;
+  border-bottom: 1px black solid;
+}
+
+.invoice-no, #info {
+  padding: 8px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+#info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px black solid;
+}
+
+.date {
+  float: right;
+}
+
+.items {
+  width: 100%;
+}
+
+.item-table {
+  display: table;
+  width: 100%;
+  border-spacing: 5px;
+}
+
+.item-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.total {
+  border-top: 1px black solid;
+  text-align: right;
+  padding-right: 4%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.data, .header {
+  width: 20%;
+  text-align: center;
+  padding: 2px;
+}
+
+.header {
+  font-weight: bold;
+}
