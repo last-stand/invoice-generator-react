@@ -5,6 +5,7 @@ import Invoice from './Invoice';
 
 describe('Invoice component', () => {
   let invoiceProps;
+  let wrapper;
 
   beforeEach(() => {
     invoiceProps = {
@@ -35,6 +36,12 @@ describe('Invoice component', () => {
     };
   });
 
+  afterEach(() => {
+    if(wrapper) {
+      wrapper.unmount();
+    }
+  });
+
   it('should render Invoice component without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Invoice invoice={invoiceProps}/>, div);
@@ -42,7 +49,7 @@ describe('Invoice component', () => {
   });
 
   it('should render one invoice div with invoice props', () => {
-    const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+    wrapper = mount(<Invoice invoice={invoiceProps}/>);
 
     expect(wrapper.find('div#invoice').length).toEqual(1);
     expect(wrapper.prop('invoice')).toEqual(invoiceProps);
@@ -51,13 +58,13 @@ describe('Invoice component', () => {
   describe('InvoiceTitle component', () => {
 
     it('should render one InvoiceTitle component', () => {
-      const wrapper = shallow(<Invoice invoice={invoiceProps}/>);
+      wrapper = shallow(<Invoice invoice={invoiceProps}/>);
 
       expect(wrapper.find('InvoiceTitle').length).toEqual(1);
     });
 
     it('should render InvoiceTitle component with "Invoice" text in h2', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceTitleH2Wrapper = wrapper.find('InvoiceTitle').find('h2');
 
       expect(invoiceTitleH2Wrapper.length).toEqual(1);
@@ -69,7 +76,7 @@ describe('Invoice component', () => {
   describe('InvoiceInfo component', () => {
 
     it('should render one InvoiceInfo component with "info" props', () => {
-      const wrapper = shallow(<Invoice invoice={invoiceProps}/>);
+      wrapper = shallow(<Invoice invoice={invoiceProps}/>);
       let invoiceInfoWrapper =  wrapper.find('InvoiceInfo');
 
       expect(invoiceInfoWrapper.length).toEqual(1);
@@ -77,7 +84,7 @@ describe('Invoice component', () => {
     });
 
     it('should render one div component with invoice number in it', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceInfoWrapper = wrapper.find('InvoiceInfo').find('div.invoice-no');
 
       expect(invoiceInfoWrapper.length).toEqual(1);
@@ -86,7 +93,7 @@ describe('Invoice component', () => {
     });
 
     it('should render one div component with customer info in it', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let infoWrapper = wrapper.find('InvoiceInfo').find('div#info');
 
       expect(infoWrapper.length).toEqual(1);
@@ -95,7 +102,7 @@ describe('Invoice component', () => {
     });
 
     it('should render one div component with date info in it', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let infoWrapper = wrapper.find('InvoiceInfo').find('div#info');
 
       expect(infoWrapper.length).toEqual(1);
@@ -108,7 +115,7 @@ describe('Invoice component', () => {
   describe('InvoiceItemTable', () => {
 
     it('should render one InvoiceItemTable component with "data" props', () => {
-      const wrapper = shallow(<Invoice invoice={invoiceProps}/>);
+      wrapper = shallow(<Invoice invoice={invoiceProps}/>);
       let invoiceTableWrapper =  wrapper.find('InvoiceItemTable');
 
       expect(invoiceTableWrapper.length).toEqual(1);
@@ -116,14 +123,14 @@ describe('Invoice component', () => {
     });
 
     it('should have one InvoiceItemHeader component as child', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceTableWrapper =  wrapper.find('InvoiceItemTable');
 
       expect(invoiceTableWrapper.find('InvoiceItemHeader').length).toEqual(1);
     });
 
     it('should render two InvoiceItemRow component as child', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceTableWrapper =  wrapper.find('InvoiceItemTable');
 
       expect(invoiceTableWrapper.find('InvoiceItemRow').length).toEqual(2);
@@ -134,14 +141,14 @@ describe('Invoice component', () => {
   describe('InvoiceItemHeader', () => {
 
     it('should render five header divs', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceHeaderWrapper =  wrapper.find('InvoiceItemHeader');
 
       expect(invoiceHeaderWrapper.find('div.header').length).toEqual(5);
     });
 
     it('should render header divs with header text', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceHeaderWrapper =  wrapper.find('InvoiceItemHeader').find('div.item-row');
 
       expect(invoiceHeaderWrapper.childAt(0).text()).toEqual('S No.');
@@ -156,7 +163,7 @@ describe('Invoice component', () => {
   describe('InvoiceItemRow', () => {
 
     it('should render one InvoiceItemRow component with "data" & "index" props', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceDataWrapperFirst =  wrapper.find('InvoiceItemRow').first();
       let invoiceDataWrapperSecond =  wrapper.find('InvoiceItemRow').last();
 
@@ -167,7 +174,7 @@ describe('Invoice component', () => {
     });
 
     it('should render five data divs for each InvoiceItemRow', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceDataWrapperFirst =  wrapper.find('InvoiceItemRow').first();
       let invoiceDataWrapperSecond =  wrapper.find('InvoiceItemRow').last();
 
@@ -176,7 +183,7 @@ describe('Invoice component', () => {
     });
 
     it('should render data for invoice item', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
       let invoiceDataWrapperFirst =  wrapper.find('InvoiceItemRow').find('div.item-row').first();
       let invoiceDataWrapperSecond =  wrapper.find('InvoiceItemRow').find('div.item-row').last();
 
@@ -197,7 +204,7 @@ describe('Invoice component', () => {
   describe('TotalPrice', () => {
 
     it('should render one TotalPrice component with "total" props', () => {
-      const wrapper = shallow(<Invoice invoice={invoiceProps}/>);
+      wrapper = shallow(<Invoice invoice={invoiceProps}/>);
 
       let invoiceTotalWrapper = wrapper.find('TotalPrice');
       expect(invoiceTotalWrapper.length).toEqual(1);
@@ -205,7 +212,7 @@ describe('Invoice component', () => {
     });
 
     it('should render total price with "Total" text in bold', () => {
-      const wrapper = mount(<Invoice invoice={invoiceProps}/>);
+      wrapper = mount(<Invoice invoice={invoiceProps}/>);
 
       let invoiceTotalWrapper = wrapper.find('TotalPrice');
       expect(invoiceTotalWrapper.contains(<b>Total: </b>)).toBeTruthy();

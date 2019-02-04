@@ -1,5 +1,6 @@
 import React from 'react';
 import Invoice from './Invoice';
+import axios from 'axios';
 
 class InvoiceApp extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class InvoiceApp extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/api/invoice/1")
-      .then(res => res.json())
+    axios.get("http://localhost:8080/api/invoice/1")
+      .then(response => response.data)
       .then(
-        (result) => {
-          updateTotalPrice(result)
+        (result) => { console.log(result);
+          updateTotalPrice(result);
           this.setState({
             isLoaded: true,
             invoice: result
