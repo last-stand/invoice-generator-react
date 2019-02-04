@@ -16,7 +16,6 @@ class InvoiceApp extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log("result" + result);
           updateTotalPrice(result)
           this.setState({
             isLoaded: true,
@@ -34,7 +33,6 @@ class InvoiceApp extends React.Component {
 
   render() {
     const { error, isLoaded, invoice } = this.state;
-    console.log(this.state);
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
