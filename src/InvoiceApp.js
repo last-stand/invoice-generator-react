@@ -14,22 +14,19 @@ class InvoiceApp extends React.Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/invoice/1")
-      .then(response => response.data)
-      .then(
-        (result) => { console.log(result);
-          updateTotalPrice(result);
-          this.setState({
-            isLoaded: true,
-            invoice: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error: error
-          });
-        }
-      )
+      .then((response) => {
+        let result = response.data;
+        updateTotalPrice(result);
+        this.setState({
+          isLoaded: true,
+          invoice: result
+        });
+      }, (error) => {
+      this.setState({
+        isLoaded: true,
+        error: error
+      })
+    });
   }
 
   render() {
