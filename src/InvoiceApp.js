@@ -8,14 +8,14 @@ class InvoiceApp extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      invoice: {}
+      invoice: []
     };
   }
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/invoice/1")
       .then((response) => {
-        let result = response.data;
+        let result = response.data[0];
         updateTotalPrice(result);
         this.setState({
           isLoaded: true,
